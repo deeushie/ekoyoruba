@@ -191,6 +191,9 @@ body{background:#F8F0E6;color:var(--ink)}
   <div class="ona-intro-shell">
     <div class="ona-intro-top"><span class="ona-mini-mark">Ọ</span><span id="onaSlideCount">1 / 3</span><button id="onaSkip" type="button">Skip</button></div>
     <div class="ona-intro-art" id="onaIntroArt">
+      <img class="ona-scene-image active" id="onaScene1" src="mascot-welcome.webp" alt="Green chameleon wearing a Yoruba fila cap" />
+      <img class="ona-scene-image" id="onaScene2" src="mascot-learning.webp" alt="Green chameleon wearing a Yoruba gele beside learning books" />
+      <img class="ona-scene-image" id="onaScene3" src="mascot-journey.webp" alt="Green chameleon exploring a path with a backpack" />
       <div class="ona-sun"></div><div class="ona-land"></div>
       <div class="ona-mascot" id="onaMascot" aria-label="Friendly green chameleon mascot">
         <div class="ona-hat fila"><span></span><i></i></div>
@@ -584,6 +587,7 @@ renderStats();$("#extraView").style.display="none";if(!mascotStyle)showSetup();
  let slide=0;
  function render(){
   const s=slides[slide]; intro.dataset.slide=String(slide+1);
+  document.querySelectorAll('.ona-scene-image').forEach((img,i)=>img.classList.toggle('active',i===slide));
   document.getElementById('onaSlideCount').textContent=(slide+1)+' / 3';
   document.getElementById('onaKicker').textContent=s.kicker;
   document.getElementById('onaHeadline').textContent=s.title;
@@ -612,3 +616,14 @@ renderStats();$("#extraView").style.display="none";if(!mascotStyle)showSetup();
  }
 })();
 </script>
+
+<style id="ona-real-mascot-artwork">
+.ona-intro-art{background:#f5dfbd!important}
+.ona-intro-art .ona-sun,.ona-intro-art .ona-land,.ona-intro-art .ona-mascot,.ona-intro-art .ona-book-stack{display:none!important}
+.ona-scene-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:none;z-index:1}
+.ona-scene-image.active{display:block}
+.ona-intro[data-slide="1"] #onaScene1{object-position:center 48%}
+.ona-intro[data-slide="2"] #onaScene2{object-position:center 46%}
+.ona-intro[data-slide="3"] #onaScene3{object-position:center 48%}
+@media(max-width:520px){.ona-intro-shell{width:min(100%,430px)}.ona-scene-image{object-fit:cover}}
+</style>
